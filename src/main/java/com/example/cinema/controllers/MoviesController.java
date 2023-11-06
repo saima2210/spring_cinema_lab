@@ -15,19 +15,22 @@ public class MoviesController {
 
 
         @Autowired
-        MoviesService moviesservice;
+        MoviesService moviesService;
 
         @PostMapping
-        public ResponseEntity<Movies> newMovie(){
-            Movies movies = moviesService.getNewMovie();
-            return new ResponseEntity<>( movies, HttpStatus.CREATED);
+        public ResponseEntity<Movies> createNewMovie(@RequestBody Movies newMovies){
+            Movies createdmovies = moviesService.createMovies(newMovies);
+            return new ResponseEntity<>( createdmovies, HttpStatus.CREATED);
         }
 
-
+        @GetMapping
+        public List<Movies> getAllMovies() {
+            return moviesService.getAllMovies();
+        }
 
         @GetMapping(value = "/id")
         public Movies getMoviesById(@PathVariable long id) {
-            return getMovies.getMoivesById(id).orElse(null);
+            return moviesService.getMoviesById(id).orElse(null);
         }
 
     }
