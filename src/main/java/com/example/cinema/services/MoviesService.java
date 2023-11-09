@@ -25,4 +25,8 @@ public class MoviesService {
     public Movies createMovies(Movies movies) {
         return moviesRepository.save(movies);
     }
+
+    public Movies getMoviesById(long id) {
+        return moviesRepository.findById(id).orElse(null);
+    }
 }
